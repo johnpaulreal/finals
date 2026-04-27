@@ -239,10 +239,6 @@ section {
   min-height: 500px;
 }
 
-.container.active {
-  transform: translateX(-50%);
-}
-
 .main-box {
   background: rgba(17, 25, 41, 0.96);
   padding: 2.5rem 2rem;
