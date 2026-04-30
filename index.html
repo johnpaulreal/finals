@@ -40,64 +40,107 @@
     <!---home form section design-->
     <section class="home">
     <div class="container">
+        <!-- Form Toggle Switch for Mobile -->
+        <div class="form-toggle-mobile">
+            <button type="button" class="toggle-btn login-toggle active" id="mobile-login-toggle" aria-label="Switch to Login">Login</button>
+            <button type="button" class="toggle-btn register-toggle" id="mobile-register-toggle" aria-label="Switch to Register">Register</button>
+        </div>
+
         <div class="main-box login">
-            <h1>Login</h1>
-            <form action="">
+            <h1>Welcome Back</h1>
+            <p class="form-subtitle">Sign in to your account</p>
+            <form action="" novalidate>
                 <div class="input-box">
                     <span class="icon"><i class='bx bx-envelope'></i></span>
-                    <input type="email" id="login-email" required placeholder=" ">
-                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required placeholder=" " autocomplete="email">
+                    <label for="login-email">Email Address</label>
+                    <span class="error-message"></span>
                 </div>
 
-                <div class="input-box">
+                <div class="input-box password-box">
                     <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                    <input type="password" id="login-password" required placeholder=" ">
-                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required placeholder=" " autocomplete="current-password">
+                    <label for="login-password">Password</label>
+                    <button type="button" class="toggle-password" id="login-toggle-pwd" aria-label="Toggle password visibility">
+                        <i class='bx bx-hide'></i>
+                    </button>
+                    <span class="error-message"></span>
                 </div>
 
                 <div class="check">
-                    <label><input type="checkbox" id="remember">Remember me</label>
-                    <a href="#" aria-label="Forgot password">Forget Password</a>
+                    <div class="remember-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember" class="checkbox-label">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link" aria-label="Forgot password">Forgot Password?</a>
                 </div>
 
-                <button type="submit" class="main-btn" aria-label="Login to your account">Login</button>
+                <button type="submit" class="main-btn" aria-label="Login to your account">Sign In</button>
 
-                <div class="register">
-                    <p>If you don't have an account? <a href="#" class="register-link" aria-label="Switch to registration form">Register Here!</a></p>
+                <div class="form-switch">
+                    <p>Don't have an account? <a href="#" class="register-link" aria-label="Switch to registration form">Create one here</a></p>
                 </div>
             </form>
         </div>
 
         <div class="main-box register">
-            <h1>Registration</h1>
-            <form action="">
+            <h1>Create Account</h1>
+            <p class="form-subtitle">Join us for a better experience</p>
+            <form action="" novalidate>
                 
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-user'></i></span>
-                    <input type="text" id="register-username" required placeholder=" ">
-                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" required placeholder=" " autocomplete="username" minlength="3" maxlength="20">
+                    <label for="register-username">Username</label>
+                    <span class="error-message"></span>
+                    <span class="helper-text">3-20 characters, letters and numbers only</span>
                 </div>
 
                 <div class="input-box">
                     <span class="icon"><i class='bx bx-envelope'></i></span>
-                    <input type="email" id="register-email" required placeholder=" ">
-                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required placeholder=" " autocomplete="email">
+                    <label for="register-email">Email Address</label>
+                    <span class="error-message"></span>
                 </div>
 
-                <div class="input-box">
+                <div class="input-box password-box">
                     <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                    <input type="password" id="register-password" required placeholder=" " minlength="8">
-                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" required placeholder=" " minlength="8" autocomplete="new-password">
+                    <label for="register-password">Password</label>
+                    <button type="button" class="toggle-password" id="register-toggle-pwd" aria-label="Toggle password visibility">
+                        <i class='bx bx-hide'></i>
+                    </button>
+                    <span class="error-message"></span>
+                    <span class="helper-text">At least 8 characters, with uppercase, lowercase, and numbers</span>
                 </div>
 
-                <div class="check">
-                    <label><input type="checkbox" id="terms" required>I accept all <a href="#" aria-label="Terms and conditions">terms & conditions</a></label>
+                <div class="input-box password-box">
+                    <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+                    <input type="password" id="confirm-password" required placeholder=" " autocomplete="new-password">
+                    <label for="confirm-password">Confirm Password</label>
+                    <button type="button" class="toggle-password" id="confirm-toggle-pwd" aria-label="Toggle password visibility">
+                        <i class='bx bx-hide'></i>
+                    </button>
+                    <span class="error-message"></span>
                 </div>
 
-                <button type="submit" class="main-btn" aria-label="Create new account">Register Now</button>
+                <div class="password-strength" id="password-strength">
+                    <div class="strength-bar"><div class="strength-fill"></div></div>
+                    <span class="strength-text">Password strength: <strong id="strength-label">-</strong></span>
+                </div>
 
-                <div class="register">
-                    <p>Already have an account? <a href="#" class="login-link" aria-label="Switch to login form">Login</a></p>
+                <div class="check terms-group">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" class="checkbox-label">I accept the <a href="#" aria-label="Terms and conditions">terms & conditions</a></label>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+
+                <button type="submit" class="main-btn" aria-label="Create new account">Create Account</button>
+
+                <div class="form-switch">
+                    <p>Already have an account? <a href="#" class="login-link" aria-label="Switch to login form">Sign in here</a></p>
                 </div>
 
             </form>

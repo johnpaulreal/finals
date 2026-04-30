@@ -273,17 +273,57 @@ section {
 .main-box h1 {
   color: var(--accent);
   font-size: 2rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+/* Form Toggle Switch for Mobile */
+.form-toggle-mobile {
+  display: none;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, var(--accent), #fb7a25);
+  color: #06111f;
+  border-color: var(--accent);
+}
+
+.toggle-btn:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .input-box {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-box input {
   width: 100%;
-  padding: 1rem 1.2rem;
+  padding: 1rem 2.8rem 1rem 1.2rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -310,11 +350,46 @@ section {
 
 .input-box input.invalid {
   border-color: #ff6b6b !important;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1) !important;
+  background: rgba(255, 107, 107, 0.05);
 }
 
 .input-box input.valid {
   border-color: #51cf66 !important;
+  background: rgba(81, 207, 102, 0.05);
+}
+
+/* Password Box Specific Styling */
+.password-box {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.toggle-password:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.toggle-password i {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-box label {
@@ -342,11 +417,109 @@ section {
 
 .input-box .icon {
   position: absolute;
-  right: 1rem;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--accent);
   font-size: 1rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Error Messages */
+.error-message {
+  display: none;
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.input-box input.invalid ~ .error-message {
+  display: block;
+}
+
+/* Helper Text */
+.helper-text {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-weight: 400;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+
+.password-strength.active {
+  display: block;
+}
+
+.strength-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  background: #ff6b6b;
+}
+
+.strength-text {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+#strength-label {
+  color: #ff6b6b;
+}
+
+.strength-fill.weak {
+  width: 25%;
+  background: #ff6b6b;
+}
+
+#strength-label.weak {
+  color: #ff6b6b;
+}
+
+.strength-fill.fair {
+  width: 50%;
+  background: #ffa94d;
+}
+
+#strength-label.fair {
+  color: #ffa94d;
+}
+
+.strength-fill.good {
+  width: 75%;
+  background: #74c0fc;
+}
+
+#strength-label.good {
+  color: #74c0fc;
+}
+
+.strength-fill.strong {
+  width: 100%;
+  background: #51cf66;
+}
+
+#strength-label.strong {
+  color: #51cf66;
 }
 
 .check {
@@ -356,25 +529,130 @@ section {
   gap: 1rem;
   color: var(--muted);
   font-size: 0.95rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
 }
 
-.check input[type="checkbox"] {
-  accent-color: var(--accent);
-  width: 16px;
-  height: 16px;
-  margin-right: 0.5rem;
+.remember-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
 }
 
-.check a {
+.checkbox-label:hover {
+  color: var(--accent);
+}
+
+.check input[type="checkbox"],
+.terms-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.forgot-link {
   color: var(--accent);
   transition: all 0.3s ease;
   text-decoration: none;
+  font-weight: 600;
 }
 
-.check a:hover {
+.forgot-link:hover {
   text-decoration: underline;
+  color: #fb7a25;
+}
+
+/* Terms Group Styling */
+.terms-group {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  margin-top: 0.2rem;
+}
+
+.checkbox-wrapper label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.checkbox-wrapper label a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.checkbox-wrapper label a:hover {
+  text-decoration: underline;
+}
+
+.terms-group .error-message {
+  margin-top: 0.3rem;
+}
+
+/* Form Switch */
+.form-switch {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 1.5rem;
+}
+
+.form-switch p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.form-switch a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.form-switch a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.form-switch a:hover::after {
+  width: 100%;
+}
+
+.form-switch a:hover {
   color: #fb7a25;
 }
 
@@ -391,6 +669,10 @@ section {
   font-size: 1rem;
   position: relative;
   overflow: hidden;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-btn::before {
@@ -409,8 +691,12 @@ section {
 }
 
 .main-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(249, 115, 28, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(249, 115, 28, 0.3);
+}
+
+.main-btn:active {
+  transform: translateY(-1px);
 }
 
 .main-btn:disabled {
@@ -424,42 +710,7 @@ section {
   box-shadow: none;
 }
 
-.register {
-  text-align: center;
-  color: var(--muted);
-  margin-top: 1.2rem;
-}
 
-.register p {
-  font-size: 0.95rem;
-}
-
-.register p a {
-  color: var(--accent);
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.register p a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.3s ease;
-}
-
-.register p a:hover::after {
-  width: 100%;
-}
-
-.register p a:hover {
-  color: #fb7a25;
-}
 
 .picture {
   display: grid;
@@ -832,40 +1083,168 @@ section {
   }
 
   /* Improve touch targets */
-  .navbar a,
-  .register p a,
-  .check a,
-  .btn,
-  .btn-link {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .main-btn,
+  .toggle-btn {
+    min-height: 48px;
   }
 
-  /* Better spacing for mobile */
   .input-box input,
   .input-box label {
     font-size: 16px; /* Prevents zoom on iOS */
   }
 
+  .main-box {
+    padding: 1.5rem 1rem;
+  }
+
+  .main-box h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-box {
+    margin-bottom: 1.3rem;
+  }
+
+  .input-box input {
+    padding: 0.9rem 2.2rem 0.9rem 0.9rem;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .toggle-password {
+    right: 0.6rem;
+    min-height: 40px;
+  }
+
+  .helper-text {
+    font-size: 0.7rem;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+  }
+
   .check {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    margin-bottom: 1.3rem;
   }
 
-  .check label {
-    order: 2;
+  .remember-group {
+    gap: 0.4rem;
   }
 
-  .check a {
-    order: 1;
-    align-self: flex-end;
+  .checkbox-label {
+    font-size: 0.9rem;
+  }
+
+  .form-toggle-mobile {
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .toggle-btn {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .form-switch p {
+    font-size: 0.9rem;
+  }
+
+  .main-btn {
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .strength-text {
+    font-size: 0.75rem;
+  }
+
+  .navbar a,
+  .register p a,
+  .check a,
+  .btn,
+  .btn-link,
+  .toggle-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 }
 
 @media (max-width: 768px) {
+  .form-toggle-mobile {
+    display: flex;
+  }
+
+  .main-box {
+    position: static;
+    transform: translateX(0) !important;
+    display: none;
+  }
+
+  .main-box.login {
+    display: block;
+  }
+
+  .container.active .main-box.login {
+    display: none;
+  }
+
+  .container.active .main-box.register {
+    display: block;
+  }
+
+  .main-box {
+    width: 100%;
+    height: auto;
+    padding: 2rem 1.5rem;
+    border-radius: 24px;
+    min-height: auto;
+  }
+
+  .main-box h1 {
+    font-size: 1.6rem;
+  }
+
+  .input-box {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-box input {
+    padding: 0.95rem 2.5rem 0.95rem 1rem;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .toggle-password {
+    right: 0.8rem;
+    top: 50%;
+  }
+
+  .helper-text {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
+
+  .check {
+    margin-bottom: 1.5rem;
+    gap: 0.8rem;
+  }
+
+  .form-switch {
+    margin-top: 1.2rem;
+  }
+
   #menu-icon {
     display: block;
   }
@@ -897,6 +1276,7 @@ section {
   .h-right {
     display: none;
   }
+}
 
   .picture {
     gap: 1.5rem;
