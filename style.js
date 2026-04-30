@@ -126,23 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputs = form.querySelectorAll('input');
         const isRegisterForm = form.closest('.register') !== null;
         
-        // Real-time validation feedback
+        // Real-time validation feedback (only after blur or on input if field has been touched)
         inputs.forEach(input => {
             input.addEventListener('blur', () => {
+                input.dataset.touched = 'true';
                 validateInput(input, isRegisterForm);
             });
             
             input.addEventListener('input', () => {
-                if (input.classList.contains('invalid')) {
+                // Always validate on input if field has been touched
+                if (input.dataset.touched) {
                     validateInput(input, isRegisterForm);
                 }
-                // Check confirm password match
-                if (input.id === 'register-password' || input.id === 'confirm-password') {
+                // Check confirm password match in real-time if touched
+                if ((input.id === 'register-password' || input.id === 'confirm-password') && input.dataset.touched) {
                     validatePasswordMatch();
                 }
             });
 
             input.addEventListener('change', () => {
+                input.dataset.touched = 'true';
                 validateInput(input, isRegisterForm);
             });
         });
@@ -150,6 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Form submission handling
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            // Mark all fields as touched on submit
+            inputs.forEach(input => {
+                input.dataset.touched = 'true';
+            });
             
             let isValid = true;
             inputs.forEach(input => {
@@ -164,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const password = form.querySelector('#register-password');
                 if (confirmPassword && password && confirmPassword.value !== password.value) {
                     isValid = false;
+                    confirmPassword.dataset.touched = 'true';
                     showError(confirmPassword, 'Passwords do not match');
                 }
             }
@@ -179,6 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.textContent = originalText;
                     showSuccessMessage(isRegisterForm ? 'Account created successfully!' : 'Logged in successfully!');
                     form.reset();
+                    // Reset touched state
+                    inputs.forEach(input => {
+                        input.dataset.touched = 'false';
+                        input.classList.remove('valid', 'invalid');
+                        clearError(input);
+                    });
                 }, 1500);
             }
         });
@@ -193,10 +208,18 @@ function validateInput(input, isRegisterForm = false) {
     input.classList.remove('invalid', 'valid');
     clearError(input);
     
+    // Only validate if field has been touched/has a value
+    if (!value && !input.dataset.touched) {
+        return true;
+    }
+    
+    // Mark as touched
+    input.dataset.touched = 'true';
+    
     // Required field check
     if (input.hasAttribute('required') && !value) {
         isValid = false;
-        errorMessage = `${input.getAttribute('aria-label') || input.id.replace(/-/g, ' ')} is required`;
+        errorMessage = `This field is required`;
     }
     
     // Email validation
@@ -213,7 +236,7 @@ function validateInput(input, isRegisterForm = false) {
         const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
         if (!usernameRegex.test(value)) {
             isValid = false;
-            errorMessage = 'Username must be 3-20 characters, letters, numbers, and underscores only';
+            errorMessage = 'Username: 3-20 characters, letters, numbers, underscores only';
         }
     }
     
@@ -243,11 +266,14 @@ function validateInput(input, isRegisterForm = false) {
         }
     }
     
-    if (value || input.hasAttribute('required')) {
+    if (!isValid && errorMessage) {
+        showError(input, errorMessage);
+    }
+    
+    if (value) {
         input.classList.add(isValid ? 'valid' : 'invalid');
-        if (!isValid && errorMessage) {
-            showError(input, errorMessage);
-        }
+    } else if (input.dataset.touched) {
+        input.classList.add('invalid');
     }
     
     return isValid;

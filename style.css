@@ -419,6 +419,14 @@ section {
   padding: 0 0.4rem;
 }
 
+.input-box input.valid + label {
+  color: #51cf66;
+}
+
+.input-box input.invalid + label {
+  color: #ff6b6b;
+}
+
 .input-box .icon {
   position: absolute;
   left: 0.8rem;
