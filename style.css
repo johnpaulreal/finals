@@ -317,19 +317,22 @@ section {
 .input-box {
   position: relative;
   margin-bottom: 1.8rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .input-box input {
   width: 100%;
-  padding: 1rem 2.8rem 1rem 1.2rem;
+  padding: 1rem 1.2rem 1rem 2.8rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text);
   font-size: 1rem;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.password-box input {
+  padding-right: 2.8rem;
 }
 
 .input-box input:focus {
@@ -394,7 +397,7 @@ section {
 
 .input-box label {
   position: absolute;
-  left: 1.1rem;
+  left: 2.8rem;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -402,22 +405,23 @@ section {
   font-size: 0.95rem;
   transition: all 0.3s ease;
   background: transparent;
-  padding: 0 0.5rem;
+  padding: 0 0.3rem;
 }
 
 .input-box input:focus + label,
-.input-box input:valid + label {
-  top: 0.9rem;
+.input-box input:not(:placeholder-shown) + label {
+  top: 0.25rem;
   font-size: 0.78rem;
   color: var(--accent);
   transform: translateY(0);
   background: rgba(17, 25, 41, 0.96);
   border-radius: 4px;
+  padding: 0 0.4rem;
 }
 
 .input-box .icon {
   position: absolute;
-  left: 1rem;
+  left: 0.8rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--accent);
@@ -426,6 +430,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 /* Error Messages */
