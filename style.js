@@ -280,7 +280,8 @@ function validateInput(input, isRegisterForm = false) {
 }
 
 function showError(input, message) {
-    const errorElement = input.parentElement.querySelector('.error-message');
+    const errorElement = input.closest('.form-group')?.querySelector('.error-message') || 
+                        input.parentElement.querySelector('.error-message');
     if (errorElement) {
         errorElement.textContent = message;
         errorElement.style.display = 'block';
@@ -290,7 +291,8 @@ function showError(input, message) {
 }
 
 function clearError(input) {
-    const errorElement = input.parentElement.querySelector('.error-message');
+    const errorElement = input.closest('.form-group')?.querySelector('.error-message') || 
+                        input.parentElement.querySelector('.error-message');
     if (errorElement) {
         errorElement.textContent = '';
         errorElement.style.display = 'none';
